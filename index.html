@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitify | Catálogo Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d4af37;
+            --dark: #0a0a0a;
+            --light: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+            --accent: #b8860b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* --- Estilos de Navegación --- */
+        #main-content, #detail-view {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .hidden { display: none; opacity: 0; transform: translateY(20px); }
+
+        /* --- Hero --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.3)), 
+                        url('img/principal.jpg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 5rem); }
+
+        /* --- Catálogo Grid 3x2 --- */
+        .section {
+            padding: 40px 5% 80px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .grid-3x2 {
+            display: grid;
+            /* Definición estricta de 3 columnas */
+            grid-template-columns: repeat(3, 1fr);
+            /* Definición de 2 filas */
+            grid-template-rows: repeat(2, auto);
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 50px 30px;
+            border-radius: 25px;
+            text-align: center;
+            transition: 0.4s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-15px);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .card h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; }
+
+        /* --- Vista de Detalle --- */
+        #detail-view {
+            min-height: 100vh;
+            padding: 100px 10%;
+            background: radial-gradient(circle at top right, #1a1a1a, #0a0a0a);
+        }
+
+        .back-btn {
+            background: none;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 25px;
+            cursor: pointer;
+            border-radius: 30px;
+            margin-bottom: 40px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover { background: var(--primary); color: var(--dark); }
+
+        .detail-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .detail-img {
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        /* --- CTA Section --- */
+        .cta {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 80px 20px;
+            text-align: center;
+            clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .price-tag { font-size: 2.5rem; color: var(--primary); font-weight: 700; margin: 20px 0; }
+
+        /* --- Footer --- */
+        footer { padding: 50px; text-align: center; border-top: 1px solid var(--glass); }
+
+    </style>
+</head>
+<body>
+
+    <main id="main-content">
+        <header class="hero">
+            <div data-aos="zoom-out">
+                <p style="letter-spacing: 5px; color: var(--primary);">EXPERIENCIAS DIGITALES</p>
+                <h1>Invitify Collection</h1>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="grid-3x2">
+                <div class="card" onclick="showDetail('bodas')" data-aos="fade-up">
+                    <h3>Bodas</h3>
+                    <p>Elegancia eterna para el "Sí, acepto".</p>
+                </div>
+                <div class="card" onclick="showDetail('xv')" data-aos="fade-up" data-aos-delay="100">
+                    <h3>Quince Años</h3>
+                    <p>Magia y estilo para tu gran noche.</p>
+                </div>
+                <div class="card" onclick="showDetail('bautizos')" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Bautizos</h3>
+                    <p>Pureza y ternura en tu celebración.</p>
+                </div>
+                <div class="card" onclick="showDetail('corp')" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Corporativos</h3>
+                    <p>Profesionalismo en cada detalle.</p>
+                </div>
+                <div class="card" onclick="showDetail('cumples')" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Cumpleaños</h3>
+                    <p>¡Celebra la vida con máximo estilo!</p>
+                </div>
+                <div class="card" onclick="showDetail('tar')" data-aos="fade-up" data-aos-delay="500">
+                    <h3>Tarjetas</h3>
+                    <p>Tu presentacion es lo mas Importante.</p>
+                </div>
+            </div>
+        </section>
+        </section>
+   <section class="cta" data-aos="flip-up">
+    <h2>¿Listo para impresionar a tus invitados?</h2>
+    <p style="margin-bottom: 20px;">Empieza hoy mismo tu diseño personalizado.</p>
+    
+    <a href="https://wa.me/5217712211481?text=Hola%20quiero%20saber%20mas%20sobre%20las%20invitaciones" 
+       target="_blank" 
+       class="btn" 
+       style="background: var(--dark); color: white;">
+       Contactar por WhatsApp
+    </a>
+</section>
+    </main>
+
+    <section id="detail-view" class="hidden">
+        <button class="back-btn" onclick="hideDetail()">← Volver al Catálogo</button>
+        <div class="detail-content">
+            <div id="detail-text">
+                <h2 id="cat-title" style="font-family: 'Playfair Display', serif; font-size: 4rem;">Título</h2>
+                <p id="cat-desc" style="font-size: 1.2rem; margin: 20px 0; line-height: 1.6; opacity: 0.8;"></p>
+                <ul id="cat-features" style="margin-bottom: 30px; list-style: none;">
+                    <li>✨ Confirmación RSVP en tiempo real</li>
+                    <li>📍 Ubicación GPS integrada</li>
+                    <li>📸 Galería de fotos previa</li>
+                </ul>
+                <div class="price-tag">Desde $49.00</div>
+                <button class="back-btn" style="background: var(--primary); color: var(--dark); font-weight: bold;">ADQUIRIR AHORA</button>
+            </div>
+            <img id="cat-img" class="detail-img" src="" alt="Evento">
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Invitify Premium - El servicio de tus eventos.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        const data = {
+            bodas: {
+                title: "Bodas de Ensueño",
+                desc: "Nuestras invitaciones de boda combinan tipografía clásica con efectos de partículas doradas. Incluyen cuenta regresiva y lista de regalos vinculada.",
+                img: "img/novios.jpg"
+            },
+            xv: {
+                title: "Mis XV Años",
+                desc: "Diseños modernos con transiciones tipo TikTok o Instagram Stories. Perfectas para la generación Z que busca impacto visual inmediato.",
+                img: "img/quince.jpg"
+            },
+            corp: {
+                title: "Eventos Corporativos",
+                desc: "Minimalismo ejecutivo. Integración con Google Calendar, LinkedIn y códigos QR para acceso rápido al recinto.",
+                img: "img/corporativo.jpg"
+            },
+            bautizos: {
+                title: "Bautizos y Baby Showers",
+                desc: "Estilos acuarela y pasteles. Un diseño delicado para compartir la alegría de la nueva vida con tus seres más cercanos.",
+                img: "img/bautizo.jpg"
+            },
+            cumples: {
+                title: "Cumpleaños VIP",
+                desc: "Desde fiestas infantiles temáticas hasta celebraciones de 50 años. Animaciones festivas y mapa interactivo de la fiesta.",
+                img: "img/cmpleaños.jpg"
+            },
+            tar: {
+                title: "Tarjetas de presentación",
+                desc: "Desde fiestas infantiles temáticas hasta celebraciones de 50 años. Animaciones festivas y mapa interactivo de la fiesta.",
+                img: "img/tarjeta.jpg"
+            }
+        };
+
+        function showDetail(category) {
+            const item = data[category];
+            document.getElementById('cat-title').innerText = item.title;
+            document.getElementById('cat-desc').innerText = item.desc;
+            document.getElementById('cat-img').src = item.img;
+
+            document.getElementById('main-content').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('main-content').style.display = 'none';
+                document.getElementById('detail-view').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('detail-view').classList.remove('hidden');
+                }, 50);
+            }, 500);
+        }
+
+        function hideDetail() {
+            document.getElementById('detail-view').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('detail-view').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('main-content').classList.remove('hidden');
+                }, 50);
+            }, 500);
+        }
+    </script>
+    </body>
+</html>
