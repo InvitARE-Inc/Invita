@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XV Gisselle | Invitify Intermedio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e7a1b0; /* Oro Rosa Juvenil */
+            --gold: #d4af37;
+            --dark: #2a2a2a;
+            --soft-bg: #fdfaf6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--soft-bg); color: var(--dark); overflow-x: hidden; }
+
+        /* --- HERO --- */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), 
+                        url('https://images.pexels.com/photos/17834489/pexels-photo-17834489.jpeg?auto=compress&w=1200') no-repeat center center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white;
+        }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 10vw, 6rem); font-style: italic; }
+        .hero p { letter-spacing: 5px; text-transform: uppercase; font-size: 1rem; }
+
+        .main-card {
+            max-width: 550px; margin: -50px auto 0; background: white; position: relative;
+            z-index: 10; border-radius: 40px 40px 0 0; padding: 40px 25px; box-shadow: 0 -15px 30px rgba(0,0,0,0.05);
+        }
+
+        section { padding: 40px 0; text-align: center; border-bottom: 1px solid #fce4ec; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--primary); margin-bottom: 25px; }
+
+        /* --- CONTADOR --- */
+        .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
+        .time-box { background: #fff; border: 1px solid var(--primary); padding: 15px 5px; border-radius: 15px; }
+        .time-box span { display: block; font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+        .time-box label { font-size: 0.6rem; text-transform: uppercase; color: var(--dark); opacity: 0.7; }
+
+        /* --- GALERÍA --- */
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+        .gallery-grid img { width: 100%; height: 180px; object-fit: cover; border-radius: 15px; cursor: pointer; transition: 0.3s; }
+        .gallery-grid img:hover { transform: scale(1.02); }
+
+        /* --- DRESSCODE --- */
+        .dress-container { display: flex; justify-content: space-around; margin-top: 15px; }
+        .dress-item { background: #fffafb; padding: 20px; border-radius: 20px; width: 45%; border: 1px solid #fce4ec; }
+        .dress-item span { font-size: 2rem; display: block; margin-bottom: 10px; }
+
+        /* --- BOTONES --- */
+        .btn-gold {
+            display: inline-block; background: var(--primary); color: white; padding: 15px 30px;
+            border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.8rem; 
+            letter-spacing: 1px; text-transform: uppercase; transition: 0.3s; border: none;
+        }
+        .btn-gold:hover { background: var(--gold); transform: translateY(-3px); }
+
+        .map-frame { width: 100%; height: 230px; border-radius: 15px; border: none; margin: 15px 0; }
+
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+        #modal img { max-width: 90%; max-height: 80%; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div data-aos="zoom-in">
+            <p>Mis XV Años</p>
+            <h1>Gisselle</h1>
+            <p>26 . Julio . 2025</p>
+        </div>
+    </header>
+
+    <main class="main-card">
+        <section data-aos="fade-up">
+            <h2>Faltan...</h2>
+            <div class="countdown">
+                <div class="time-box"><span id="days">00</span><label>Días</label></div>
+                <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
+                <div class="time-box"><span id="mins">00</span><label>Min</label></div>
+                <div class="time-box"><span id="secs">00</span><label>Seg</label></div>
+            </div>
+        </section>
+
+        <section data-aos="fade-up">
+            <h2>Mi Sesión</h2>
+            <div class="gallery-grid">
+                <img src="https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&w=400" onclick="openImg(this.src)">
+                <img src="https://images.pexels.com/photos/1385472/pexels-photo-1385472.jpeg?auto=compress&w=400" onclick="openImg(this.src)">
+            </div>
+        </section>
+
+        <section data-aos="fade-up">
+            <h2>Código de Vestimenta</h2>
+            <div class="dress-container">
+                <div class="dress-item"><span>👔</span><p><b>Hombres</b><br>Formal</p></div>
+                <div class="dress-item"><span>👗</span><p><b>Mujeres</b><br>Vestido Largo</p></div>
+            </div>
+        </section>
+
+        <section data-aos="fade-up">
+            <h2>¿Dónde será?</h2>
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 5px;">Ceremonia</h3>
+                <p style="font-size: 0.9rem;">Templo de San Antonio | 7:00 PM</p>
+                <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.2604246944645!2d-102.2949746!3d21.886022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429ee647902d295%3A0x600b83e843e9d80d!2sTemplo%20de%20San%20Antonio%20de%20Padua!5e0!3m2!1ses-419!2smx!4v1715600000000!5m2!1ses-419!2smx"></iframe>
+                <a href="https://maps.app.goo.gl/3f6vU7m6F6m6F6m6F" target="_blank" class="btn-gold">Abrir GPS</a>
+            </div>
+        </section>
+
+        <footer style="text-align:center; padding: 30px; opacity:0.6; font-size:0.8rem;">
+            Diseñado por <strong>Invitify Premium</strong>
+        </footer>
+    </main>
+
+    <div id="modal" onclick="this.style.display='none'"><img id="modal-img"></div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        function openImg(src) { document.getElementById('modal').style.display='flex'; document.getElementById('modal-img').src=src; }
+        
+        const target = new Date('July 26, 2025 19:00:00').getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = target - now;
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
+</body>
+</html>

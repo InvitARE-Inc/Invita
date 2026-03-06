@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Bautizo | Invitify Intermedio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --baby-blue: #a8dadc;
+            --gold-soft: #c5a059;
+            --glass-white: rgba(255, 255, 255, 0.82);
+            --text: #4a4a4a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f4f7f9; color: var(--text); overflow-x: hidden; }
+
+        /* --- FONDO FIJO --- */
+        .fixed-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.pexels.com/photos/1612461/pexels-photo-1612461.jpeg?auto=compress&w=1500') no-repeat center center/cover;
+            z-index: -1;
+            filter: opacity(0.3) grayscale(0.2);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #1d3557;
+        }
+        .hero-content h1 { font-family: 'Great Vibes', cursive; font-size: clamp(4rem, 12vw, 6rem); margin-bottom: 0; }
+        .hero-content p { font-family: 'Playfair Display', serif; font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase; }
+
+        /* --- CONTENEDOR DE CRISTAL --- */
+        .glass-container {
+            max-width: 550px;
+            margin: -60px auto 40px;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.6);
+            border-radius: 40px;
+            padding: 45px 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: #457b9d; margin-bottom: 25px; font-style: italic; }
+
+        /* --- GALERÍA --- */
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+        .gallery-grid img { width: 100%; height: 200px; object-fit: cover; border-radius: 20px; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: pointer; }
+
+        /* --- DRESS CODE --- */
+        .dress-code { display: flex; justify-content: space-around; margin-top: 20px; }
+        .dress-item { background: rgba(255,255,255,0.5); padding: 20px; border-radius: 20px; width: 45%; border: 1px solid #eee; }
+        .dress-item span { font-size: 2.2rem; display: block; margin-bottom: 8px; }
+
+        /* --- MAPA CORREGIDO --- */
+        .map-box {
+            border-radius: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.8);
+            margin: 20px 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        .map-box iframe { width: 100%; height: 300px; border: 0; display: block; }
+
+        /* --- BOTÓN --- */
+        .btn-baby {
+            display: inline-block;
+            padding: 16px 35px;
+            background: #457b9d;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            border: none;
+        }
+        .btn-baby:hover { background: #1d3557; transform: translateY(-3px); }
+
+        /* --- MODAL --- */
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+        #modal img { max-width: 90%; max-height: 80%; border-radius: 10px; }
+
+        footer { text-align: center; padding: 40px; font-size: 0.75rem; color: #457b9d; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <div class="fixed-bg"></div>
+
+    <header class="hero">
+        <div class="hero-content" data-aos="zoom-in">
+            <p>Bautizo de</p>
+            <h1>Mateo</h1>
+            <p>Mis Padrinos</p>
+        </div>
+    </header>
+
+    <main class="glass-container">
+        
+        <section class="glass-card" data-aos="fade-up">
+            <h2>Nuestra Cita</h2>
+            <p>Acompáñanos a celebrar el inicio de mi camino espiritual.</p>
+            <p style="margin-top: 15px; font-weight: 600;">Sábado 05 de Octubre, 2025</p>
+            <p>12:00 PM | Parroquia de la Sagrada Familia</p>
+        </section>
+
+        <section class="glass-card" data-aos="fade-up">
+            <h2>Mi Sesión</h2>
+            <div class="gallery-grid">
+                <img src="https://images.pexels.com/photos/3845492/pexels-photo-3845492.jpeg?auto=compress&w=400" onclick="openImg(this.src)">
+                <img src="https://images.pexels.com/photos/3845239/pexels-photo-3845239.jpeg?auto=compress&w=400" onclick="openImg(this.src)">
+            </div>
+            <p style="font-size: 0.7rem; opacity: 0.6;">Toca las fotos para ampliar</p>
+        </section>
+
+        <section class="glass-card" data-aos="fade-up">
+            <h2>Ubicación</h2>
+            <div class="map-box">
+                <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.44123456789!2d-102.3!3d21.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDU0JzAwLjAiTiAxMDLCsDE4JzAwLjAiVw!5e0!3m2!1ses!2smx!4v1700000000000!5m2!1ses!2smx" 
+        width="100%" 
+        height="250" 
+        style="border:0; border-radius: 15px;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    <a href="https://maps.app.goo.gl/YpGjS" target="_blank" class="btn-sage" style="display:block; text-align:center; margin-top:15px; text-decoration:none;">
+        📍 Tocar para abrir GPS
+    </a>        </section>
+
+        <section class="glass-card" data-aos="fade-up">
+            <h2>Código de Vestimenta</h2>
+            <div class="dress-code">
+                <div class="dress-item">
+                    <span>👔</span>
+                    <p><b>Hombres</b><br>Guayabera / Formal</p>
+                </div>
+                <div class="dress-item">
+                    <span>👗</span>
+                    <p><b>Mujeres</b><br>Vestido de Cóctel</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-card" data-aos="fade-up">
+            <h2>¿Nos acompañas?</h2>
+            <p>Tu presencia es nuestra alegría.</p>
+            <br>
+            <a href="https://wa.me/521234567890?text=Hola! Confirmamos nuestra asistencia al bautizo de Mateo." class="btn-baby">Confirmar por WhatsApp</a>
+        </section>
+
+        <footer>
+            DISEÑADO POR INVITIFY PREMIUM
+        </footer>
+
+    </main>
+
+    <div id="modal" onclick="this.style.display='none'"><img id="modal-img"></div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        function openImg(src) { document.getElementById('modal').style.display='flex'; document.getElementById('modal-img').src=src; }
+    </script>
+</body>
+</html>

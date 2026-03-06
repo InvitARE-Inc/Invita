@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XV Gisselle | Invitify Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d4af37; /* Dorado Invitify */
+            --dark: #0a0a0a;
+            --light: #ffffff;
+            --soft-pink: #fdf2f5;
+            --glass: rgba(255, 255, 255, 0.95);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--soft-pink); 
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* --- Hero Inmersivo (Tu estilo solicitado) --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), 
+                        url('https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=1200') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(4rem, 15vw, 8rem); 
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .hero p { letter-spacing: 8px; text-transform: uppercase; font-weight: 300; font-size: 1.2rem; }
+
+        /* --- Contenedor Principal Elegante --- */
+        .main-container {
+            max-width: 500px;
+            margin: -50px auto 0;
+            background: white;
+            position: relative;
+            z-index: 10;
+            border-radius: 40px 40px 0 0;
+            padding: 40px 25px;
+            box-shadow: 0 -15px 35px rgba(0,0,0,0.1);
+        }
+
+        .section { text-align: center; padding: 40px 0; border-bottom: 1px solid #f0f0f0; }
+        
+        h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 20px; color: var(--primary); }
+
+        /* --- Contador Premium --- */
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 30px 0;
+        }
+        .time-box {
+            background: var(--dark);
+            color: white;
+            padding: 15px 5px;
+            border-radius: 12px;
+        }
+        .time-box span { display: block; font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+        .time-box label { font-size: 0.6rem; text-transform: uppercase; opacity: 0.7; }
+
+        /* --- Botones Estilo Invitify --- */
+        .btn-gold {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            border: none;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
+
+        /* --- Ubicación Card --- */
+        .location-card {
+            background: var(--soft-pink);
+            padding: 25px;
+            border-radius: 25px;
+            margin-top: 20px;
+        }
+        .map-frame {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            margin: 15px 0;
+            filter: grayscale(0.5);
+        }
+
+        /* --- Formulario Clean --- */
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div data-aos="zoom-in" data-aos-duration="1500">
+            <p>Mis Quince Años</p>
+            <h1>Gisselle</h1>
+            <div style="width: 50px; height: 2px; background: var(--primary); margin: 20px auto;"></div>
+            <p style="font-size: 0.9rem; letter-spacing: 3px;">26 . JULIO . 2025</p>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="section" data-aos="fade-up">
+            <h2>¡Estás Invitado!</h2>
+            <p style="line-height: 1.8; font-weight: 300;">
+                Hay momentos en la vida que son especiales por sí solos, pero compartirlos con las personas que amas los hace inolvidables.
+            </p>
+        </section>
+
+        <section class="section" data-aos="fade-up">
+            <h2>Faltan solo...</h2>
+            <div class="countdown" id="timer">
+                <div class="time-box"><span id="days">00</span><label>Días</label></div>
+                <div class="time-box"><span id="hours">00</span><label>Horas</label></div>
+                <div class="time-box"><span id="mins">00</span><label>Mins</label></div>
+                <div class="time-box"><span id="secs">00</span><label>Segs</label></div>
+            </div>
+            <button class="btn-gold" onclick="alert('Evento añadido')">Agendar Evento</button>
+        </section>
+
+       <section class="section" data-aos="fade-up">
+            <h2>Dónde & Cuándo</h2>
+            
+            <div class="location-card">
+                <p style="text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; color: var(--primary); font-weight: bold;">Ceremonia Religiosa</p>
+                <h3 style="margin: 10px 0;">Templo de San Antonio de Padua</h3>
+                <p style="font-size: 0.9rem; opacity: 0.7;">Sábado 26 de Julio - 7:00 PM</p>
+                
+                <iframe 
+                    class="map-frame" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.260481816766!2d-102.29465762395697!3d21.88607315802379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429ee644725ed6d%3A0x3348630985a53673!2sTemplo%20de%20San%20Antonio%20de%20Padua!5e0!3m2!1ses-419!2smx!4v1715634567890!5m2!1ses-419!2smx" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                
+                <a href="https://maps.app.goo.gl/p5vJzJ8mK1L2" target="_blank" class="btn-gold" style="font-size: 0.7rem; padding: 10px 20px;">Abrir en Google Maps</a>
+            </div>
+
+            <div class="location-card" style="margin-top: 30px;">
+                <p style="text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; color: var(--primary); font-weight: bold;">Recepción Elite</p>
+                <h3 style="margin: 10px 0;">Hotel Quinta Real Aguascalientes</h3>
+                <p style="font-size: 0.9rem; opacity: 0.7;">Sábado 26 de Julio - 9:00 PM</p>
+                
+                <iframe 
+                    class="map-frame" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.9463286026933!2d-102.29388882395781!3d21.860155058962656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8429ee10787e9569%3A0x338f041d8e136367!2sQuinta%20Real%20Aguascalientes!5e0!3m2!1ses-419!2smx!4v1715634612345!5m2!1ses-419!2smx" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                
+                <a href="https://maps.app.goo.gl/q8xK9L1mN3P4" target="_blank" class="btn-gold" style="font-size: 0.7rem; padding: 10px 20px;">Abrir en Google Maps</a>
+            </div>
+        </section>
+
+        <section class="section" data-aos="fade-up">
+            <h2>Confirmar Asistencia</h2>
+            <p style="margin-bottom: 25px; font-size: 0.9rem;">Por favor, confirma antes del 10 de Julio.</p>
+            <form id="rsvp-form">
+                <input type="text" placeholder="Tu nombre completo" required>
+                <select required>
+                    <option value="">¿Asistirás?</option>
+                    <option value="si">Confirmar Asistencia</option>
+                    <option value="no">No podré asistir</option>
+                </select>
+                <input type="number" placeholder="Personas confirmadas" min="1" max="10">
+                <button type="submit" class="btn-gold" style="width: 100%;">Enviar Confirmación</button>
+            </form>
+        </section>
+
+        <footer>
+            <p>Diseñado con ❤️ por <strong>Invitify Premium</strong></p>
+            <p style="margin-top: 10px; font-size: 0.7rem;">Hacedores de Invitaciones de Alta Gama</p>
+        </footer>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Lógica del Contador
+        const targetDate = new Date('July 26, 2025 19:00:00').getTime();
+
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = d;
+            document.getElementById('hours').innerText = h < 10 ? '0'+h : h;
+            document.getElementById('mins').innerText = m < 10 ? '0'+m : m;
+            document.getElementById('secs').innerText = s < 10 ? '0'+s : s;
+        }, 1000);
+    </script>
+</body>
+</html>
