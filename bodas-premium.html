@@ -3,118 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Glass Edition | Invitify</title>
+    <title>Edición Premium | Invitare Festa Perfetta</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&family=Birthstone&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
             --gold-rose: #e7a1b0;
-            --glass-white: rgba(255, 255, 255, 0.75); /* Transparencia clave */
+            --glass-white: rgba(255, 255, 255, 0.8);
             --glass-border: rgba(231, 161, 176, 0.4);
             --text-dark: #444;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Montserrat', sans-serif; 
-            background-color: #fdfaf6;
-            color: var(--text-dark);
-        }
+        body { font-family: 'Montserrat', sans-serif; background-color: #fdfaf6; color: var(--text-dark); }
 
-        /* --- FONDO FIJO (Para el efecto de transparencia al hacer scroll) --- */
         .fixed-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&w=1500') no-repeat center center/cover;
-            z-index: -1;
-            filter: brightness(0.9) saturate(0.8);
+            z-index: -1; filter: brightness(0.9);
         }
 
-        /* --- HERO --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            background: rgba(0,0,0,0.2); /* Sutil velo sobre el fondo */
+        /* --- MÚSICA REPRODUCTOR --- */
+        .music-player {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+            background: var(--glass-white); backdrop-filter: blur(10px);
+            padding: 10px; border-radius: 50px; border: 1px solid var(--glass-border);
+            display: flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 5rem; font-style: italic; text-shadow: 2px 2px 15px rgba(0,0,0,0.3); }
-        .hero-content p { font-family: 'Birthstone', cursive; font-size: 3rem; color: #f1e0b5; }
+        .play-btn { background: var(--gold-rose); border: none; color: white; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; }
 
-        /* --- TARJETAS TRASLÚCIDAS (GLASSMORPHISM) --- */
-        .glass-container {
-            max-width: 550px;
-            margin: -80px auto 50px;
-            padding: 20px;
-            position: relative;
-            z-index: 10;
-        }
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; background: rgba(0,0,0,0.2); }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 15vw, 6rem); font-style: italic; }
 
+        .glass-container { max-width: 550px; margin: -80px auto 50px; padding: 20px; position: relative; z-index: 10; }
         .glass-card {
-            background: var(--glass-white);
-            backdrop-filter: blur(12px); /* EFECTO DE CRISTAL ESMERILADO */
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 40px;
-            padding: 50px 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            text-align: center;
+            background: var(--glass-white); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border); border-radius: 40px; padding: 50px 30px; margin-bottom: 40px; text-align: center;
         }
 
-        h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold-rose); margin-bottom: 20px; font-style: italic; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold-rose); margin-bottom: 20px; }
 
-        /* --- MAPA CON TRANSPARENCIA --- */
-        .map-box {
-            border-radius: 25px;
-            overflow: hidden;
-            border: 1px solid var(--glass-border);
-            margin: 20px 0;
-            background: rgba(255,255,255,0.5);
-        }
-        .map-box iframe { width: 100%; height: 350px; border: 0; display: block; filter: grayscale(0.2); }
+        /* --- CUENTA REGRESIVA --- */
+        .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
+        .time-box { background: rgba(255,255,255,0.5); padding: 15px 5px; border-radius: 15px; border: 1px solid var(--glass-border); }
+        .time-box span { display: block; font-size: 1.4rem; font-weight: 700; color: var(--gold-rose); }
 
-        /* --- BOTONES PREMIUM --- */
+        /* --- GALERÍA PREMIUM (14 FOTOS TOTAL) --- */
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .gallery-grid img { width: 100%; height: 150px; object-fit: cover; border-radius: 15px; cursor: pointer; border: 2px solid white; transition: 0.3s; }
+
+        /* --- ITINERARIO --- */
+        .timeline { text-align: left; padding-left: 20px; border-left: 2px solid var(--gold-rose); margin: 20px 0; }
+        .event { position: relative; margin-bottom: 25px; padding-left: 20px; }
+        .event::before { content: ''; position: absolute; left: -29px; top: 5px; width: 15px; height: 15px; background: var(--gold-rose); border-radius: 50%; }
+
         .btn-premium {
-            display: inline-block;
-            padding: 18px 40px;
-            border-radius: 50px;
+            display: inline-block; padding: 15px 30px; border-radius: 50px;
             background: linear-gradient(135deg, #e7a1b0 0%, #d4af37 100%);
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            transition: 0.4s;
-            border: none;
-            box-shadow: 0 10px 20px rgba(231, 161, 176, 0.3);
+            color: white; text-decoration: none; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px;
         }
 
-        /* --- GALERÍA TRASLÚCIDA --- */
-        .gallery img {
-            width: 100%;
-            border-radius: 20px;
-            margin-bottom: 15px;
-            border: 5px solid rgba(255,255,255,0.5);
-            transition: 0.3s;
-        }
-
-        footer { text-align: center; padding: 40px; color: white; text-shadow: 1px 1px 5px rgba(0,0,0,0.5); }
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+        #modal img { max-width: 90%; max-height: 80%; border: 3px solid white; }
     </style>
 </head>
 <body>
 
     <div class="fixed-bg"></div>
 
+    <div class="music-player">
+        <button class="play-btn" id="musicToggle">▶</button>
+        <span style="font-size: 0.7rem; font-weight: 600;">Nuestra Canción</span>
+        <audio id="bgMusic" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
     <header class="hero">
         <div class="hero-content" data-aos="zoom-in">
-            <p>Nuestra Boda</p>
-            <h1>S & A</h1>
-            <p>Unidos para siempre</p>
+            <p style="font-family: 'Birthstone', cursive; font-size: 3rem; color: #f1e0b5;">Nuestra Boda</p>
+            <h1>Sofía & Alejandro</h1>
+            <p style="letter-spacing: 4px; text-transform: uppercase; font-size: 0.8rem;">12 . DIC . 2026</p>
         </div>
     </header>
 
@@ -122,53 +91,103 @@
         
         <section class="glass-card" data-aos="fade-up">
             <h2>Nuestra Cita</h2>
-            <p style="font-size: 1.1rem; letter-spacing: 1px;">Sábado 12 de Diciembre de 2025</p>
-            <p>6:00 PM | Hacienda San José</p>
-            <br>
-            <p>"El amor no tiene que ser perfecto, tiene que ser sincero."</p>
+            <p>"Encontrarte fue como encontrar una canción que mi corazón ya conocía."</p>
+            <div class="countdown">
+                <div class="time-box"><span id="days">00</span><small>Días</small></div>
+                <div class="time-box"><span id="hours">00</span><small>Hrs</small></div>
+                <div class="time-box"><span id="mins">00</span><small>Min</small></div>
+                <div class="time-box"><span id="secs">00</span><small>Seg</small></div>
+            </div>
+        </section>
+
+        <section class="glass-card" data-aos="fade-up">
+            <h2>Itinerario</h2>
+            <div class="timeline">
+                <div class="event"><b>6:00 PM</b><br>Ceremonia Religiosa</div>
+                <div class="event"><b>7:30 PM</b><br>Cóctel de Bienvenida</div>
+                <div class="event"><b>9:00 PM</b><br>Cena y Recepción</div>
+                <div class="event"><b>11:00 PM</b><br>Apertura de Pista</div>
+            </div>
+        </section>
+
+        <section class="glass-card" data-aos="fade-up">
+            <h2>Nuestros Momentos</h2>
+            <div class="gallery-grid">
+                <img src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&w=300" onclick="openImg(this.src)">
+                <img src="https://images.pexels.com/photos/1456613/pexels-photo-1456613.jpeg?auto=compress&w=300" onclick="openImg(this.src)">
+                <img src="https://images.pexels.com/photos/948185/pexels-photo-948185.jpeg?auto=compress&w=300" onclick="openImg(this.src)">
+                <img src="https://images.pexels.com/photos/1045541/pexels-photo-1045541.jpeg?auto=compress&w=300" onclick="openImg(this.src)">
+                <img src="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg?auto=compress&w=300" onclick="openImg(this.src)">
+                <img src="https://images.pexels.com/photos/17834/pexels-photo.jpg?auto=compress&w=300" onclick="openImg(this.src)">
+                </div>
         </section>
 
         <section class="glass-card" data-aos="fade-up">
             <h2>Ubicación</h2>
-            <p>Para que no te pierdas el gran momento:</p>
-            <div class="map-box">
-               
-<iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.44123456789!2d-102.3!3d21.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDU0JzAwLjAiTiAxMDLCsDE4JzAwLjAiVw!5e0!3m2!1ses!2smx!4v1700000000000!5m2!1ses!2smx" 
-        width="100%" 
-        height="250" 
-        style="border:0; border-radius: 15px;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-    <a href="https://maps.app.goo.gl/YpGjS" target="_blank" class="btn-sage" style="display:block; text-align:center; margin-top:15px; text-decoration:none;">
-        📍 Tocar para abrir GPS
-    </a>
+            <p>Hacienda San José, Aguascalientes</p>
+            <div style="border-radius: 20px; overflow: hidden; margin: 15px 0;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3701.832442475654!2d-102.2941!3d21.8823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDUyJzU2LjMiTiAxMDLCsDE3JzM4LjgiVw!5e0!3m2!1ses!2smx!4v1600000000000!5m2!1ses!2smx" width="100%" height="250" style="border:0;" allowfullscreen=""></iframe>
+            </div>
+            <a href="#" target="_blank" class="btn-premium">Abrir GPS</a>
+        </section>
+
         <section class="glass-card" data-aos="fade-up">
-            <h2>Nuestra Historia</h2>
-            <div class="gallery">
-                <img src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&w=600">
-                <img src="https://images.pexels.com/photos/1456613/pexels-photo-1456613.jpeg?auto=compress&w=600">
+            <h2>Mesa de Regalos</h2>
+            <p>Tu compañía es nuestro regalo, pero si deseas obsequiarnos algo:</p>
+            <div style="margin-top: 20px; padding: 20px; border: 1px dashed var(--gold-rose); border-radius: 20px;">
+                <p><b>Liverpool</b><br>Evento: 50482931</p>
+                <a href="#" class="btn-premium" style="margin-top: 10px; font-size: 0.6rem;">Ver en Tienda</a>
             </div>
         </section>
 
         <section class="glass-card" data-aos="fade-up">
             <h2>Confirmar Asistencia</h2>
-            <p>Por favor, confirma tu lugar antes del 15 de Noviembre.</p>
+            <p>Confirmar antes del 15 de Noviembre</p>
             <br>
-            <a href="https://wa.me/521234567890" class="btn-premium">Confirmar por WhatsApp</a>
+            <a href="https://wa.me/5217712211481" class="btn-premium">Confirmar por WhatsApp</a>
         </section>
 
         <footer>
-            <p>DISEÑADO POR INVITIFY PREMIUM</p>
+            <p>DISEÑADO POR <strong>INVITARE FESTA PERFETTA</strong></p>
         </footer>
-
     </main>
+
+    <div id="modal" onclick="this.style.display='none'"><img id="modal-img"></div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1200, once: true });
+
+        // REPRODUCCIÓN DE MÚSICA
+        const music = document.getElementById('bgMusic');
+        const btn = document.getElementById('musicToggle');
+        btn.onclick = () => {
+            if (music.paused) { music.play(); btn.innerText = '⏸'; }
+            else { music.pause(); btn.innerText = '▶'; }
+        };
+
+        function openImg(src) { 
+            document.getElementById('modal').style.display='flex'; 
+            document.getElementById('modal-img').src=src; 
+        }
+
+        // RELOJ CORREGIDO
+        const target = new Date('December 12, 2026 18:00:00').getTime();
+        function updateTime() {
+            const diff = target - new Date().getTime();
+            if (diff > 0) {
+                const d = Math.floor(diff / 86400000);
+                const h = Math.floor((diff % 86400000) / 3600000);
+                const m = Math.floor((diff % 3600000) / 60000);
+                const s = Math.floor((diff % 60000) / 1000);
+                document.getElementById('days').innerText = d < 10 ? '0'+d : d;
+                document.getElementById('hours').innerText = h < 10 ? '0'+h : h;
+                document.getElementById('mins').innerText = m < 10 ? '0'+m : m;
+                document.getElementById('secs').innerText = s < 10 ? '0'+s : s;
+            }
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
     </script>
 </body>
 </html>
